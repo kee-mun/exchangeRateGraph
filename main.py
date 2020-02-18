@@ -3,25 +3,24 @@ import csv
 
 #Create CSV File Function
 def createCsvFile(data):
-    f = open('exchangerate.csv', 'w', newline='')
+    f = open('exchangerate.csv', 'w', encoding='UTF-8',newline='')
     csv.writer(f).writerow(data)
     f.close()
 
 #new data Exchange Rate
 def writeExchangeRate(data):
-    try:
-        with open('exchangerate.csv','a', newline='') as f:
-            wr = csv.wirter(f)
-            wr.writerow(data)
-    except:
-        createCsvFile(['Date', "Rate"])
-        writeExchangeRate(data)
+    with open('exchangerate.csv','a',encoding='UTF-8', newline='') as f:
+        wr = csv.writer(f)
+        wr.writerow(data)
+
+# show plot graph
 def show(xlabel,ylabel,x, y):
     plt.plot(x, y)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.show()
 
+# read csv file & call plot graph
 def readCsvFile():
     x = []
     y = []
@@ -40,12 +39,21 @@ def readCsvFile():
         print("저장된 데이터가 없습니다.")
 
 #Main Function
-menu = int(input("""Select Menu
+
+#exchangerate CSV File check
+try:
+    f = open('exchangerate.csv','r')
+    f.close()
+except:
+    createCsvFile(['Date', 'Rate'])
+
+#main loop
+while True:
+    menu = int(input("""Select Menu
 1. write exchange rate data
 2. show graph exchange rate data
 :"""))
 
-while True:
     if menu == 1 :
         data = []
         data.append(input("Date :"))
@@ -55,5 +63,3 @@ while True:
 
     elif menu == 2 :
         pass
-
-    menu = 0
