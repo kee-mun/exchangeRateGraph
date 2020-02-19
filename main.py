@@ -37,7 +37,7 @@ def readCsvFile():
                 ylabel = i[1]
             else:
                 x.append(i[0])
-                y.append(i[1])
+                y.append(int(i[1]))
             j += 1
     show(xlabel,ylabel,x, y)
 
