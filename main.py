@@ -25,18 +25,21 @@ def readCsvFile():
     x = []
     y = []
     xlabel, ylabel = '', ''
-    try:
-        with open('exchangerate.csv','r') as f:
-            reader = csv.reader(f)
-            xlabel = reader[0][0]
-            ylabel = reader[0][1]
-            for i in range(1,len(reader)):
+
+    with open('exchangerate.csv','r') as f:
+        reader = csv.reader(f)
+        j = 0
+        # xlabel = reader[0][0]
+        # ylabel = reader[0][1]
+        for i in reader:
+            if j == 0:
+                xlabel = i[0]
+                ylabel = i[1]
+            else:
                 x.append(i[0])
                 y.append(i[1])
-        show(xlabel,ylabel,x, y)
-    except:
-        createCsvFile(['Date', "Rate"])
-        print("저장된 데이터가 없습니다.")
+            j += 1
+    show(xlabel,ylabel,x, y)
 
 #Main Function
 
