@@ -62,4 +62,4 @@ while True:
         writeExchangeRate(data)
 
     elif menu == 2 :
-        pass
+        readCsvFile()
